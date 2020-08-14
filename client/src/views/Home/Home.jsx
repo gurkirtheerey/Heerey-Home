@@ -16,9 +16,11 @@ export const Home = () => {
               <p className="lg:text-3xl text-blue-500 text-md text-center leading-tight">
                 reach your goals.
               </p>
-              <button className="lg:w-1/2 py-2 px-4 text-sm bg-blue-500 hover:bg-blue-400 text-white font-bold lg:py-3 lg:px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded self-center my-4">
-                <NavLink to="/login">Get Started</NavLink>
-              </button>
+              <NavLink to="/login">
+                <button className="lg:w-1/2 py-2 px-4 text-sm bg-blue-500 hover:bg-blue-400 text-white font-bold lg:py-3 lg:px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded self-center my-4">
+                  Get Started
+                </button>
+              </NavLink>
             </div>
             <svg
               id="75ec1790-e4b7-40a0-8812-a9d39b2e2dcc"
@@ -447,9 +449,11 @@ export const Home = () => {
               </span>
             </div>
             <div>
-              <button className="lg:w-48 py-2 px-4 text-sm bg-blue-600 hover:bg-blue-800 text-white font-bold lg:py-3 lg:px-4 rounded self-center my-4">
-                <NavLink to="/exercises">View More</NavLink>
-              </button>
+              <NavLink to="/exercises">
+                <button className="lg:w-48 py-2 px-4 text-sm bg-blue-600 hover:bg-blue-800 text-white font-bold lg:py-3 lg:px-4 rounded self-center my-4">
+                  View More
+                </button>
+              </NavLink>
             </div>
           </div>
         </div>
@@ -979,9 +983,14 @@ export const Home = () => {
             <div className="flex flex-col text-gray-600 text-center text-sm lg:text-2xl font-bold">
               <span>Healthy Habits.</span>
               <span>Long Lasting Life.</span>
-              <button className="lg:w-48 py-2 px-3 text-sm bg-purple-500 hover:bg-purple-800 text-white font-bold lg:py-3 lg:px-4 rounded self-center my-4">
-                <NavLink to="/register">Join Now!</NavLink>
-              </button>
+              <NavLink to="/register">
+                <button
+                  className="lg:w-48 py-2 px-3 text-sm bg-purple-500 hover:bg-purple-800 text-white font-bold lg:py-3 lg:px-4 rounded self-center my-4"
+                  to="/register"
+                >
+                  Join Now!
+                </button>
+              </NavLink>
             </div>
           </div>
         </div>
