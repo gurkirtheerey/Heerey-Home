@@ -6,10 +6,7 @@ import { useEffect } from "react";
 
 export const Header = () => {
   const [menu, setMenu] = useState(false);
-  const ref = useRef(null);
-  useEffect(() => {
-    console.log("width", ref ? ref.current.offsetWidth : "hooo");
-  }, [ref]);
+
   return (
     <div className="flex justify-center">
       <nav className="w-4/5 flex items-center justify-between flex-wrap p-6 mb-12">
@@ -31,50 +28,52 @@ export const Header = () => {
             </svg>
           </button>
         </div>
-        <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-          <div ref={ref} className="flex-grow">
-            <NavLink
-              to="/exercises"
-              className="block mt-6 lg:inline-block lg:mt-0s text-gray-500 hover:text-gray-800 m-6"
-            >
-              Exercises
-            </NavLink>
-            <NavLink
-              to="products"
-              className="block mt-6 lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-800 m-6"
-            >
-              Essentials
-            </NavLink>
-            <NavLink
-              to="/workouts"
-              className="block mt-6 lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-800 m-6"
-            >
-              Workouts
-            </NavLink>
-            <NavLink
-              to="/contact"
-              className="block mt-6 lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-800 m-6"
-            >
-              Contact
-            </NavLink>
-            <NavLink
-              to="/register"
-              className="hidebtns block mt-6 lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-800 m-6"
-            >
-              <button className="hover:text-gray-800 font-semibold">
-                Sign up
-              </button>
-            </NavLink>
-            <NavLink
-              to="/login"
-              className="hidebtns block mt-6 lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-800 m-6"
-            >
-              <button className="hover:text-gray-800 font-semibold">
-                Login
-              </button>
-            </NavLink>
+        {menu && (
+          <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+            <div className="flex-grow">
+              <NavLink
+                to="/exercises"
+                className="block mt-6 lg:inline-block lg:mt-0s text-gray-500 hover:text-gray-800 m-6"
+              >
+                Exercises
+              </NavLink>
+              <NavLink
+                to="products"
+                className="block mt-6 lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-800 m-6"
+              >
+                Essentials
+              </NavLink>
+              <NavLink
+                to="/workouts"
+                className="block mt-6 lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-800 m-6"
+              >
+                Workouts
+              </NavLink>
+              <NavLink
+                to="/contact"
+                className="block mt-6 lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-800 m-6"
+              >
+                Contact
+              </NavLink>
+              <NavLink
+                to="/register"
+                className="hidebtns block mt-6 lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-800 m-6"
+              >
+                <button className="hover:text-gray-800 font-semibold">
+                  Sign up
+                </button>
+              </NavLink>
+              <NavLink
+                to="/login"
+                className="hidebtns block mt-6 lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-800 m-6"
+              >
+                <button className="hover:text-gray-800 font-semibold">
+                  Login
+                </button>
+              </NavLink>
+            </div>
           </div>
-        </div>
+        )}
         <div className="hidden lg:flex lg:w-32 justify-between text-gray-600 font-semibold">
           <NavLink to="/login" className="hover:text-gray-600">
             <button className="hover:text-gray-800 font-semibold">Login</button>
