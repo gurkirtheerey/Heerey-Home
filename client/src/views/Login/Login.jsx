@@ -39,12 +39,17 @@ export const Login = () => {
             >
               Sign In
             </button>
-            <NavLink
-              to="/forgotpassword"
-              className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-            >
-              Forgot Password?
-            </NavLink>
+            <div className="flex flex-col text-sm">
+              <NavLink
+                to="/forgotpassword"
+                className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+              >
+                Forgot Password?
+              </NavLink>
+              <NavLink className="text-gray-500 mt-2" to="/register">
+                <span>Don't have an account?</span>
+              </NavLink>
+            </div>
           </div>
         </form>
         <p className="text-center text-gray-500 text-xs">

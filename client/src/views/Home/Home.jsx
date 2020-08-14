@@ -1,5 +1,6 @@
 import React from "react";
 import { Header } from "../../components/Header/Header";
+import { NavLink } from 'react-router-dom';
 
 export const Home = () => {
   return (
@@ -16,7 +17,7 @@ export const Home = () => {
                 reach your goals.
               </p>
               <button className="lg:w-1/2 py-2 px-4 text-sm bg-blue-500 hover:bg-blue-400 text-white font-bold lg:py-3 lg:px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded self-center my-4">
-                <span>Get Started</span>
+                <NavLink to="/login">Get Started</NavLink>
               </button>
             </div>
             <svg
@@ -445,19 +446,14 @@ export const Home = () => {
                 Browse a collection of our latest workouts
               </span>
             </div>
-            <div className="mt-4">
+            <div>
               <button className="lg:w-48 py-2 px-4 text-sm bg-blue-600 hover:bg-blue-800 text-white font-bold lg:py-3 lg:px-4 rounded self-center my-4">
-                <span>View More</span>
+                <NavLink to="/exercises">View More</NavLink>
               </button>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col justify-center items-center mb-24">
-          <div className="w-4/5 flex lg:flex-row flex-col justify-center items-center">
-            <div className="text-gray-700 lg:text-3xl text-md text-center"></div>
-          </div>
-        </div>
         <div className="flex justify-center flex-col items-center mb-24">
           <div className="w-4/5 flex lg:flex-row flex-col justify-between items-center px-16">
             <svg
@@ -984,7 +980,7 @@ export const Home = () => {
               <span>Healthy Habits.</span>
               <span>Long Lasting Life.</span>
               <button className="lg:w-48 py-2 px-3 text-sm bg-purple-500 hover:bg-purple-800 text-white font-bold lg:py-3 lg:px-4 rounded self-center my-4">
-                <span>Join Now!</span>
+                <NavLink to="/register">Join Now!</NavLink>
               </button>
             </div>
           </div>
