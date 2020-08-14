@@ -1,0 +1,13 @@
+.Header {
+  background: linear-gradient(
+    0deg,
+    rgba(34, 193, 195, 1) 0%,
+    rgba(45, 191, 253, 1) 100%
+  );
+}
+
+@media (min-width: 1026px) {
+  .hidebtns {
+    display: none;
+  }
+}
