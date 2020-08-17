@@ -1,8 +1,12 @@
 import React from "react";
 import { Header } from "../../components/Header/Header";
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export const Home = () => {
+  const isLoggedIn = useSelector((state) => state.authReducer.isLoggedIn);
+
+  console.log("is logged in----home: ", isLoggedIn);
   return (
     <div>
       <Header />
@@ -16,11 +20,13 @@ export const Home = () => {
               <p className="lg:text-3xl text-blue-500 text-md text-center leading-tight">
                 reach your goals.
               </p>
-              <NavLink to="/login">
-                <button className="lg:w-1/2 py-2 px-4 text-sm bg-blue-500 hover:bg-blue-400 text-white font-bold lg:py-3 lg:px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded self-center my-4">
-                  Get Started
-                </button>
-              </NavLink>
+              {!isLoggedIn && (
+                <NavLink className="flex justify-center" to="/login">
+                  <button className="lg:w-1/2 py-2 px-4 text-sm bg-blue-500 hover:bg-blue-400 text-white font-bold lg:py-3 lg:px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded self-center my-4">
+                    Get Started
+                  </button>
+                </NavLink>
+              )}
             </div>
             <svg
               id="75ec1790-e4b7-40a0-8812-a9d39b2e2dcc"
@@ -441,10 +447,10 @@ export const Home = () => {
         <div className="flex flex-col justify-center items-center mb-24">
           <div className="w-4/5 flex flex-col justify-between items-center">
             <div className="text-center ">
-              <h2 className="text-lg lg:text-4xl font-semibold">
+              <h2 className="text-md lg:text-4xl font-semibold">
                 Find workouts designed just for you
               </h2>
-              <span className="text-gray-600 text-sm lg:text-lg">
+              <span className="text-gray-600 text-xs lg:text-lg">
                 Browse a collection of our latest workouts
               </span>
             </div>
@@ -927,7 +933,7 @@ export const Home = () => {
                   transform="translate(-90 -115.91)"
                   fill="none"
                   stroke="#6c63ff"
-                  stroke-miterlimit="10"
+                  strokeMiterlimit="10"
                 />
               </g>
               <path
@@ -972,7 +978,7 @@ export const Home = () => {
                 transform="translate(-90 -115.91)"
                 fill="none"
                 stroke="#6c63ff"
-                stroke-miterlimit="10"
+                strokeMiterlimit="10"
               />
               <path
                 d="M153,669.17s1.39-1.55-1.22-2.17v-2.55h1.57a13.46,13.46,0,0,0-10.66-13.16v-3.09h.41v-4H133v4h.29v3.13a13.46,13.46,0,0,0-10.48,13.12h1.4v2.45s-3.32,1.57,0,4.37,2.8,4.89,2.8,4.89-1.4,5.24-4.19,5.94v48.75a10.83,10.83,0,0,0,10.83,10.83h8.56A10.83,10.83,0,0,0,153,730.86V682.1s-4.89-3.67-4-5.94A55,55,0,0,1,153,669.17Z"
@@ -983,14 +989,16 @@ export const Home = () => {
             <div className="flex flex-col text-gray-600 text-center text-sm lg:text-2xl font-bold">
               <span>Healthy Habits.</span>
               <span>Long Lasting Life.</span>
-              <NavLink to="/register">
-                <button
-                  className="lg:w-48 py-2 px-3 text-sm bg-purple-500 hover:bg-purple-800 text-white font-bold lg:py-3 lg:px-4 rounded self-center my-4"
-                  to="/register"
-                >
-                  Join Now!
-                </button>
-              </NavLink>
+              {!isLoggedIn && (
+                <NavLink to="/register">
+                  <button
+                    className="lg:w-48 py-2 px-3 text-sm bg-purple-500 hover:bg-purple-800 text-white font-bold lg:py-3 lg:px-4 rounded self-center my-4"
+                    to="/register"
+                  >
+                    Join Now!
+                  </button>
+                </NavLink>
+              )}
             </div>
           </div>
         </div>

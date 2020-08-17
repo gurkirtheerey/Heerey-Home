@@ -1,7 +1,21 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, useHistory } from "react-router-dom";
+import { registerUser } from "../../redux/actions/authenticate";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Register = () => {
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const isLoggedIn = useSelector((state) => state.authReducer.isLoggedIn);
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  if (isLoggedIn) {
+    history.push("/");
+  }
+
   return (
     <div className="flex h-screen justify-center items-center">
       <div className="w-full max-w-xs">
@@ -15,9 +29,10 @@ export const Register = () => {
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="username"
               type="text"
               placeholder="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="mb-4">
@@ -26,9 +41,10 @@ export const Register = () => {
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="username"
               type="text"
               placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
           <div className="mb-6">
@@ -36,19 +52,34 @@ export const Register = () => {
               Password
             </label>
             <input
-              className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="password"
+              className={`shadow appearance-none border ${
+                password.length < 8 && password.length >= 1
+                  ? "border-red-500"
+                  : null
+              } rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
               type="password"
               placeholder="********"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
-            {/* <p className="text-red-500 text-xs italic">Please choose a password.</p> */}
+            {password.length < 8 && password.length >= 1 && (
+              <p className="text-red-500 text-xs italic">
+                Password must be 8 or more characters.
+              </p>
+            )}
           </div>
           <div className="flex flex-col items-center justify-between">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline mb-4"
+              className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${
+                username.length < 6 || password.length < 8
+                  ? "cursor-not-allowed opacity-50"
+                  : null
+              } `}
               type="button"
+              onClick={() => dispatch(registerUser(email, username, password))}
+              disabled={username.length < 6 || password.length < 8}
             >
-            Register
+              Register
             </button>
             <NavLink
               to="/forgotpassword"

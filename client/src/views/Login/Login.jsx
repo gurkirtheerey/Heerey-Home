@@ -1,7 +1,32 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../../redux/actions/authenticate";
+import ClipLoader from "react-spinners/ClipLoader";
 
 export const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const loader = useSelector((state) => state.authReducer.loading);
+  const isLoggedIn = useSelector((state) => state.authReducer.isLoggedIn);
+
+  if (loader)
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <ClipLoader size={150} loading={true} color="#c7c7c7" />
+      </div>
+    );
+
+  if (isLoggedIn) {
+    history.push("/");
+  }
+
+  const authenticateUser = () => {
+    dispatch(getUser(username, password));
+  };
+
   return (
     <div className="flex h-screen justify-center items-center">
       <div className="w-full max-w-xs">
@@ -15,9 +40,10 @@ export const Login = () => {
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="username"
               type="text"
               placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
           <div className="mb-6">
@@ -25,17 +51,32 @@ export const Login = () => {
               Password
             </label>
             <input
-              className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="password"
+              className={`shadow appearance-none border ${
+                password.length < 8 && password.length >= 1
+                  ? "border-red-500"
+                  : null
+              } rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
               type="password"
               placeholder="********"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
-            {/* <p className="text-red-500 text-xs italic">Please choose a password.</p> */}
+            {password.length < 8 && password.length >= 1 && (
+              <p className="text-red-500 text-xs italic">
+                Password must be 8 or more characters.
+              </p>
+            )}
           </div>
           <div className="flex items-center justify-between">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${
+                username.length < 6 || password.length < 8
+                  ? "cursor-not-allowed opacity-50"
+                  : null
+              } `}
               type="button"
+              onClick={() => authenticateUser()}
+              disabled={username.length < 6 || password.length < 8}
             >
               Sign In
             </button>
