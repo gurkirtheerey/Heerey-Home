@@ -44,5 +44,5 @@
     "postcss-cli": "^7.1.1",
     "tailwindcss": "^1.6.2"
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "https://heerey-home.herokuapp.com/"
 }

@@ -28,5 +28,5 @@ app.get("/", auth, (req, res, next) => {
   return res.status(200).send("HI");
 });
 
-//
+// listening on dev/prod port
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
