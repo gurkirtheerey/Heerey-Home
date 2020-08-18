@@ -3,6 +3,8 @@ import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../redux/actions/authenticate";
 import ClipLoader from "react-spinners/ClipLoader";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
@@ -29,6 +31,7 @@ export const Login = () => {
 
   return (
     <div className="flex h-screen justify-center items-center">
+      <ToastContainer />
       <div className="w-full max-w-xs">
         <label className="block text-gray-700 text-md font-bold text-center mb-4">
           Login

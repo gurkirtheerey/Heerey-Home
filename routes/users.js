@@ -38,7 +38,6 @@ router.post(
         return res.status(401).json("Invalid username/password combo...");
       }
     } catch (e) {
-      console.log(e);
       return res.status(500).json({ message: "Internal Server Error" });
     }
 
@@ -84,7 +83,6 @@ router.post(
         });
       }
     } catch (e) {
-      console.log(e);
       return res.status(500).json({ message: "Internal Server Error" });
     }
   }

@@ -9,6 +9,7 @@ import {
   USER_NOT_LOGGED_IN,
 } from "../actionTypes";
 import api from "../../API";
+import { toast } from "react-toastify";
 
 // REGISTER USERS
 
@@ -19,13 +20,19 @@ export const registerInProgress = () => {
 };
 
 export const registerFailed = () => {
+  toast.error("Credentials must meet expectations...", {
+    autoClose: 3000,
+    closeOnClick: true,
+    pauseOnHover: true,
+  });
   return {
     type: REGISTER_FAILED,
-    payload: { message: "Invalid username/password combination..." },
+    payload: { message: "Credentials must meet expectations..." },
   };
 };
 
 export const registerCompleted = (email, username) => {
+  toast.success("Welcome!");
   return {
     type: REGISTER_COMPLETED,
     payload: { email, username },
@@ -63,6 +70,11 @@ export const loginFailed = () => {
 };
 
 export const loginCompleted = (email, username) => {
+  toast.success("Logged in!", {
+    autoClose: 2000,
+    closeOnClick: true,
+    pauseOnHover: true,
+  });
   return {
     type: LOGIN_COMPLETED,
     payload: { email, username },
@@ -87,10 +99,11 @@ export const getUser = (username, password) => {
   };
 };
 
-export const userLoggedIn = (token) => {
+export const userLoggedIn = (token, email, username) => {
   // localStorage.setItem("token", token);
   return {
     type: USER_LOGGED_IN,
+    payload: { email, username },
   };
 };
 
@@ -101,23 +114,35 @@ export const userNotLoggedIn = () => {
   };
 };
 
+export const logoutUser = () => {
+  localStorage.removeItem("token");
+  toast.success("Successfully logged out!", {
+    autoClose: 3000,
+    closeOnClick: true,
+    pauseOnHover: true,
+  });
+  return {
+    type: USER_NOT_LOGGED_IN,
+  };
+};
+
 export const isUserLoggedIn = () => {
   return async (dispatch) => {
     try {
       let token = localStorage.getItem("token");
-      console.log(token);
       if (token) {
         localStorage.setItem("token", token);
       }
-      const res = await api.get("/exercises", {
+      const res = await api.get("/", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log(res);
-      if (res.status === 200) {
-        dispatch(userLoggedIn(token));
+      if (res.data) {
+        let { email, username } = res.data;
+        if (res.status === 200) {
+          dispatch(userLoggedIn(token, email, username));
+        }
       }
     } catch (e) {
-      console.log(e);
       dispatch(userNotLoggedIn());
     }
   };
