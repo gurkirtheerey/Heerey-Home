@@ -7,6 +7,9 @@ import {
   LOGIN_COMPLETED,
   USER_LOGGED_IN,
   USER_NOT_LOGGED_IN,
+  GOAL_FAILED,
+  GOAL_SAVED,
+  GOAL_IN_PROGRESS,
 } from "../actionTypes";
 import api from "../../API";
 import { toast } from "react-toastify";
@@ -63,13 +66,14 @@ export const loginInProgress = () => {
 };
 
 export const loginFailed = () => {
+  toast.error("Invalid Credentials...");
   return {
     type: LOGIN_FAILED,
     payload: { message: "Invalid username/password combination..." },
   };
 };
 
-export const loginCompleted = (email, username) => {
+export const loginCompleted = (email, username, goal) => {
   toast.success("Logged in!", {
     autoClose: 2000,
     closeOnClick: true,
@@ -77,7 +81,7 @@ export const loginCompleted = (email, username) => {
   });
   return {
     type: LOGIN_COMPLETED,
-    payload: { email, username },
+    payload: { email, username, goal },
   };
 };
 
@@ -89,9 +93,9 @@ export const getUser = (username, password) => {
       const res = await api.post("/register/login", user);
       if (res.status === 200) {
         const token = res.data.token;
-        const { email, username } = res.data.user;
+        const { email, username, goal } = res.data.user;
         localStorage.setItem("token", token);
-        dispatch(loginCompleted(email, username));
+        dispatch(loginCompleted(email, username, goal));
       }
     } catch (e) {
       dispatch(loginFailed());
@@ -99,11 +103,11 @@ export const getUser = (username, password) => {
   };
 };
 
-export const userLoggedIn = (token, email, username) => {
+export const userLoggedIn = (token, email, username, goal) => {
   // localStorage.setItem("token", token);
   return {
     type: USER_LOGGED_IN,
-    payload: { email, username },
+    payload: { email, username, goal },
   };
 };
 
@@ -137,13 +141,63 @@ export const isUserLoggedIn = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.data) {
-        let { email, username } = res.data;
+        let { email, username, goal } = res.data;
         if (res.status === 200) {
-          dispatch(userLoggedIn(token, email, username));
+          dispatch(userLoggedIn(token, email, username, goal));
         }
       }
     } catch (e) {
       dispatch(userNotLoggedIn());
+    }
+  };
+};
+
+export const goalFailed = () => {
+  toast.error("There was an error saving the user's goal...", {
+    autoClose: 2000,
+    closeOnClick: true,
+    pauseOnHover: true,
+  });
+  return {
+    type: GOAL_FAILED,
+  };
+};
+
+export const goalSaved = (goal) => {
+  toast.success("Goal Saved!", {
+    autoClose: 2000,
+    closeOnClick: true,
+    pauseOnHover: true,
+  });
+  return {
+    type: GOAL_SAVED,
+    payload: { goal },
+  };
+};
+
+export const goalInProgress = () => {
+  return {
+    type: GOAL_IN_PROGRESS,
+  };
+};
+
+export const submitGoal = (goal) => {
+  return async (dispatch) => {
+    try {
+      dispatch(goalInProgress());
+      let token = localStorage.getItem("token");
+      if (token) {
+        await api.post(
+          "/exercises/setgoal",
+          { goal },
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        dispatch(goalSaved(goal));
+      }
+    } catch (e) {
+      dispatch(goalFailed());
     }
   };
 };

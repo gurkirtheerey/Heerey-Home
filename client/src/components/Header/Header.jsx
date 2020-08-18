@@ -3,11 +3,15 @@ import { NavLink } from "react-router-dom";
 import "./Header.css";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../../redux/actions/authenticate";
+import { Loader } from "../Loader/Loader";
 
 export const Header = () => {
   const [menu, setMenu] = useState(true);
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.authReducer.isLoggedIn);
+  const loading = useSelector((state) => state.authReducer.loading);
+
+  if (loading) return <Loader />;
 
   return (
     <div className="flex justify-center">

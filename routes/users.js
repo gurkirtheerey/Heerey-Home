@@ -14,12 +14,13 @@ router.post(
   ],
   async (req, res, next) => {
     const { username, password } = req.body;
-    let email;
+    let email, goal;
     try {
       // find user in db by username
       const savedUser = await User.findOne({ username });
       if (savedUser) {
         email = savedUser.email;
+        goal = savedUser.goal || null;
       }
       // if no user exists
       if (!savedUser) {
@@ -31,7 +32,7 @@ router.post(
       const isSamePassword = await bcrypt.compare(password, userHashedPass);
       const SECRET = process.env.HEEREY_HOME_KEY;
       if (isSamePassword) {
-        const user = { email, username };
+        const user = { email, username, goal };
         const token = jwt.sign(user, SECRET, { expiresIn: "30m" });
         return res.status(200).json({ user, token });
       } else {

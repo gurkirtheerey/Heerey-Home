@@ -12,9 +12,9 @@ import { ToastContainer } from "react-toastify";
 ReactDOM.render(
   <Provider store={store}>
     <ToastContainer />
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    {/* <React.StrictMode> */}
+    <App />
+    {/* </React.StrictMode> */}
   </Provider>,
   document.getElementById("root")
 );

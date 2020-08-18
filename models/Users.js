@@ -8,6 +8,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  goal: String,
 });
 
 const User = mongoose.model("User", userSchema);

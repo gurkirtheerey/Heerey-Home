@@ -8,12 +8,16 @@ import {
   USER_LOGGED_IN,
   USER_NOT_LOGGED_IN,
   USER_LOGOUT,
+  GOAL_IN_PROGRESS,
+  GOAL_SAVED,
+  GOAL_FAILED,
 } from "../actionTypes";
 
 const initialState = {
   user: {
     email: null,
     username: null,
+    goal: null,
   },
   isLoggedIn: false,
   error: "",
@@ -48,6 +52,7 @@ const authReducer = (state = initialState, action) => {
         user: {
           email: action.payload.email,
           username: action.payload.username,
+          goal: action.payload.goal,
         },
         isLoggedIn: true,
         loading: false,
@@ -63,6 +68,7 @@ const authReducer = (state = initialState, action) => {
         user: {
           email: action.payload.email,
           username: action.payload.username,
+          goal: action.payload.goal,
         },
       };
 
@@ -71,6 +77,23 @@ const authReducer = (state = initialState, action) => {
 
     case USER_LOGOUT:
       return { ...state, isLoggedIn: false };
+
+    case GOAL_IN_PROGRESS:
+      return { ...state, loading: true };
+
+    case GOAL_SAVED:
+      return {
+        ...state,
+        loading: false,
+        user: {
+          email: state.user.email,
+          username: state.user.username,
+          goal: action.payload.goal,
+        },
+      };
+
+    case GOAL_FAILED:
+      return { ...state, loading: false, error: "Unable to save User's goal" };
 
     default:
       return state;

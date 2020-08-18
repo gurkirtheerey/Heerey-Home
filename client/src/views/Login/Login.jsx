@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../redux/actions/authenticate";
-import ClipLoader from "react-spinners/ClipLoader";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { Loader } from "../../components/Loader/Loader";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
@@ -14,12 +14,7 @@ export const Login = () => {
   const loader = useSelector((state) => state.authReducer.loading);
   const isLoggedIn = useSelector((state) => state.authReducer.isLoggedIn);
 
-  if (loader)
-    return (
-      <div className="h-screen flex justify-center items-center">
-        <ClipLoader size={150} loading={true} color="#c7c7c7" />
-      </div>
-    );
+  if (loader) return <Loader />;
 
   if (isLoggedIn) {
     history.push("/");
