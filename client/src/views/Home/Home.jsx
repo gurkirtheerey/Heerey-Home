@@ -5,13 +5,18 @@ import { useSelector } from "react-redux";
 
 export const Home = () => {
   const isLoggedIn = useSelector((state) => state.authReducer.isLoggedIn);
+  const username = useSelector((state) => state.authReducer.user.username);
 
-  console.log("is logged in----home: ", isLoggedIn);
   return (
     <div>
       <Header />
       <div className="flex justify-center flex-col">
         <div className="flex flex-col justify-center items-center mb-24">
+          {isLoggedIn && (
+            <h1 className="font-semibold text-xl mb-10 tracking-widest font-mono">
+              Hello, {username}
+            </h1>
+          )}
           <div className="w-4/5 flex lg:flex-row flex-col justify-center items-center">
             <div className=" flex flex-col">
               <p className="lg:text-3xl text-gray-700 text-md text-center leading-tight">

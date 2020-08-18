@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./Header.css";
 import { useSelector, useDispatch } from "react-redux";
-import { userNotLoggedIn } from "../../redux/actions/authenticate";
+import { logoutUser } from "../../redux/actions/authenticate";
 
 export const Header = () => {
   const [menu, setMenu] = useState(true);
@@ -14,7 +14,7 @@ export const Header = () => {
       <nav className="w-4/5 flex items-center justify-between flex-wrap p-6 mb-12">
         <NavLink
           to="/"
-          className="flex items-center lg:text-xl text-sm font-semibold text-gray-800 mr-4 hover:pointer hover:text-gray-500"
+          className="flex items-center lg:text-xl text-lg font-semibold text-gray-800 mr-4 hover:pointer hover:text-gray-500"
         >
           Heerey Home
         </NavLink>
@@ -33,17 +33,12 @@ export const Header = () => {
         {menu && (
           <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
             <div className="flex-grow">
-              {isLoggedIn ? (
-                <NavLink
-                  to="/exercises"
-                  className="block mt-6 lg:inline-block lg:mt-0s text-gray-500 hover:text-gray-800 m-6"
-                >
-                  Exercises
-                </NavLink>
-              ) : (
-                <div className="block lg:inline-block lg:mt-0s text-gray-500 hover:text-gray-800 m-6"></div>
-              )}
-
+              <NavLink
+                to="/exercises"
+                className="block mt-6 lg:inline-block lg:mt-0s text-gray-500 hover:text-gray-800 m-6"
+              >
+                Exercises
+              </NavLink>
               <NavLink
                 to="products"
                 className="block mt-6 lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-800 m-6"
@@ -70,15 +65,15 @@ export const Header = () => {
                     </span>
                   </NavLink>
                   <NavLink to="/register">
-                    <span className="hover:text-gray-300 font-bold text-xl block mt-6 lg:inline-block lg:mt-0 text-gray-700 m-6 lg:absolute lg:right-0 lg:pr-16 lg:pt-6 lg:text-right">
+                    <span className="hover:text-gray-500 font-semibold text-lg block mt-6 lg:inline-block lg:mt-0 text-gray-700 m-6 lg:absolute lg:right-0 lg:pr-16 lg:pt-6 lg:text-right">
                       Sign up
                     </span>
                   </NavLink>
                 </React.Fragment>
               ) : (
                 <button
-                  onClick={() => dispatch(userNotLoggedIn())}
-                  className="hover:text-gray-300 text-xl font-bold block mt-6 lg:inline-block lg:mt-0 text-gray-700 m-6 lg:absolute lg:right-0 lg:pr-24 lg:pt-6 lg:text-right"
+                  onClick={() => dispatch(logoutUser())}
+                  className="hover:text-gray-300 text-md font-semibold block mt-6 lg:inline-block lg:mt-0 text-gray-700 m-6 lg:absolute lg:right-0 lg:pr-24 lg:pt-6 lg:text-right"
                 >
                   Logout
                 </button>

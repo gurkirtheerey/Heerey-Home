@@ -18,14 +18,14 @@ function App() {
 
   const isLoggedIn = useSelector((state) => state.authReducer.isLoggedIn);
 
-  console.log("USER AUTHENTICATED------", isLoggedIn);
+  console.log("USER AUTHENTICATED ------", isLoggedIn);
 
   return (
     <BrowserRouter>
       <Switch>
         <ProtectedRoute
-          loggedIn={isLoggedIn}
           path="/exercises"
+          auth={isLoggedIn}
           component={ExerciseList}
         />
         <Route path="/login" component={Login} />

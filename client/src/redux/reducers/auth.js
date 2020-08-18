@@ -7,6 +7,7 @@ import {
   LOGIN_FAILED,
   USER_LOGGED_IN,
   USER_NOT_LOGGED_IN,
+  USER_LOGOUT,
 } from "../actionTypes";
 
 const initialState = {
@@ -56,9 +57,19 @@ const authReducer = (state = initialState, action) => {
       return { ...state, error: action.payload.message, loading: false };
 
     case USER_LOGGED_IN:
-      return { ...state, isLoggedIn: true };
+      return {
+        ...state,
+        isLoggedIn: true,
+        user: {
+          email: action.payload.email,
+          username: action.payload.username,
+        },
+      };
 
     case USER_NOT_LOGGED_IN:
+      return { ...state, isLoggedIn: false };
+
+    case USER_LOGOUT:
       return { ...state, isLoggedIn: false };
 
     default:

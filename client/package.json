@@ -13,6 +13,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "react-spinners": "^0.9.0",
+    "react-toastify": "^6.0.8",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "thunk": "0.0.1"
@@ -44,5 +45,5 @@
     "postcss-cli": "^7.1.1",
     "tailwindcss": "^1.6.2"
   },
-  "proxy": "https://heerey-home.herokuapp.com/"
+  "proxy": "http://localhost:5000"
 }

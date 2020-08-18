@@ -1,15 +1,14 @@
-import React from "react";
-import { Route } from "react-router-dom";
+//eslint-disable-next-line
+import React, { Component } from "react";
+import { Route, Redirect } from "react-router-dom";
 
-export const ProtectedRoute = ({ Component, loggedIn, path, ...rest }) => {
-  console.log("is logged in", loggedIn, path);
+export const ProtectedRoute = ({ component: Component, auth, ...rest }) => {
   return (
     <Route
-      path={path}
       {...rest}
-      render={(props) => {
-        return loggedIn ? <h1>IFNDSFSDG</h1> : <div>YOETOWEFSD:Fhads;ga</div>;
-      }}
+      render={(props) =>
+        auth ? <Component {...props} /> : <Redirect to="/login" />
+      }
     />
   );
 };

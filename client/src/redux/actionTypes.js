@@ -9,4 +9,6 @@ export const LOGIN_COMPLETED = "LOGIN_COMPLETED";
 export const LOGIN_FAILED = "LOGIN_FAILED";
 
 export const USER_NOT_LOGGED_IN = "USER_NOT_LOGGED_IN";
-export const USER_LOGGED_IN = "USER__LOGGED_IN";
+export const USER_LOGGED_IN = "USER_LOGGED_IN";
+
+export const USER_LOGOUT = "USER_LOGOUT";
