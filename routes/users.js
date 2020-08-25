@@ -33,7 +33,7 @@ router.post(
       const SECRET = process.env.HEEREY_HOME_KEY;
       if (isSamePassword) {
         const user = { email, username, goal };
-        const token = jwt.sign(user, SECRET, { expiresIn: "30m" });
+        const token = jwt.sign(user, SECRET, { expiresIn: "60m" });
         return res.status(200).json({ user, token });
       } else {
         return res.status(401).json("Invalid username/password combo...");
@@ -75,7 +75,7 @@ router.post(
           newUser = new User({ email, username, hashedPassword });
         // save user and create token
         await newUser.save();
-        const token = jwt.sign(user, SECRET, { expiresIn: "30m" });
+        const token = jwt.sign(user, SECRET, { expiresIn: "60m" });
 
         return res.status(200).json({ user, token });
       } else {

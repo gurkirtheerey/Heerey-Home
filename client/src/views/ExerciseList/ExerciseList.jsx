@@ -12,7 +12,7 @@ export const ExerciseList = () => {
 
   if (loader) return <Loader />;
   if (goal) {
-    return <Redirect to="/plan" />;
+    return <Redirect to="/dashboard" />;
   }
 
   return (

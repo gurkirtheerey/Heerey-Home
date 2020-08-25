@@ -41,10 +41,10 @@ export const Header = () => {
                 to="/exercises"
                 className="block mt-6 lg:inline-block lg:mt-0s text-gray-500 hover:text-gray-800 m-6"
               >
-                Exercises
+                {isLoggedIn ? "Dashboard" : "Exercises"}
               </NavLink>
               <NavLink
-                to="products"
+                to="/products"
                 className="block mt-6 lg:inline-block lg:mt-0 text-gray-500 hover:text-gray-800 m-6"
               >
                 Essentials
@@ -64,14 +64,14 @@ export const Header = () => {
               {!isLoggedIn ? (
                 <React.Fragment>
                   <NavLink to="/login">
-                    <span className="hover:text-gray-300 text-xl block mt-6 lg:inline-block lg:mt-0 text-gray-700 m-6 lg:absolute lg:right-0 lg:pr-48 lg:pt-6 lg:text-right">
-                      Login
-                    </span>
+                    <div className="text-xl block mt-6 lg:inline-block lg:mt-0 text-gray-700 m-6 lg:absolute lg:right-0 lg:pr-48 lg:pt-6 lg:text-right">
+                      <span className="hover:text-gray-300">Login</span>
+                    </div>
                   </NavLink>
                   <NavLink to="/register">
-                    <span className="hover:text-gray-500 font-semibold text-lg block mt-6 lg:inline-block lg:mt-0 text-gray-700 m-6 lg:absolute lg:right-0 lg:pr-16 lg:pt-6 lg:text-right">
-                      Sign up
-                    </span>
+                    <div className="font-semibold text-lg block mt-6 lg:inline-block lg:mt-0 text-gray-700 m-6 lg:absolute lg:right-0 lg:pr-16 lg:pt-6 lg:text-right">
+                      <span className="hover:text-gray-500">Sign up</span>
+                    </div>
                   </NavLink>
                 </React.Fragment>
               ) : (

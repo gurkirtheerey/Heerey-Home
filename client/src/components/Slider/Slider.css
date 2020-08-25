@@ -1,0 +1,18 @@
+.Slider {
+  transition: 0.4s ease-in-out;
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  background-color: rgb(80, 81, 85);
+}
+
+.SlideOut {
+  transform: translateX(-900px);
+}
+
+.SlideIn {
+  transform: translateX(0);
+}

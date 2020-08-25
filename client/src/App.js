@@ -8,6 +8,8 @@ import { ExerciseList } from "./views/ExerciseList/ExerciseList";
 import { ProtectedRoute } from "./components/Route/ProtectedRoute";
 import { useDispatch, useSelector } from "react-redux";
 import { isUserLoggedIn } from "./redux/actions/authenticate";
+import { Contact } from "./views/Contact/Contact";
+import { Dashboard } from "./views/Dashboard/Dashboard";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,8 +30,19 @@ function App() {
           auth={isLoggedIn}
           component={ExerciseList}
         />
+        <ProtectedRoute
+          path="/dashboard"
+          auth={isLoggedIn}
+          component={Dashboard}
+        />
+        <ProtectedRoute
+          path="/workouts"
+          auth={isLoggedIn}
+          component={Dashboard}
+        />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
+        <Route path="/contact" component={Contact} />
         <Route exact path="/" component={Home} />
       </Switch>
     </BrowserRouter>
